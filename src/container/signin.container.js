@@ -13,28 +13,18 @@ const SignInContainer = () => {
     email: "",
     password: "",
   });
-  const [formErrors, setFormErrors] = useState({
-    email: "",
-    password: "",
-  });
+  const [formErrors, setFormErrors] = useState({});
 
   const handleSignInChange = (e) => {
     const { name, value } = e.target;
-    const error = validation(name, value);
-    setFormErrors({
-      ...formErrors,
-      [name]: error,
-    });
-    setSignInField({
-      ...signInField,
-      [name]: value,
-    });
+    setSignInField({ ...signInField, [name]: value });
+    const { isValid, message } = validation(name, value);
+    setFormErrors({ ...formErrors, [name]: { isValid, message } });
   };
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
     if (Object.values(signInField).some((value) => value.trim() === "")) {
-      // toast.error("Please fill out all fields");
     } else {
       postSignInData(signInField)
         .then((res) => {
@@ -42,26 +32,16 @@ const SignInContainer = () => {
             toast.error(res.data.message);
           } else {
             if (res.data.data.token) {
-              // localStorage.setItem("user", JSON.stringify(res.data.data));
               setLocalStorageItem(ACCESS_TOKEN, res?.data?.data);
               const token = res.data.data.token;
               setAuthToken(token);
               handlePush("/about");
-              // res.json({ token });
-              // if (res.data.data.role === "teacher") {
-              //   navigate("/teacher/dashboard");
-              // } else if (res.data.data.role === "student") {
-              //   navigate("/student/dashboard");
-              // }
-              // toast.success(res.data.message);
             } else {
               return res.data.data;
             }
           }
         })
-        .catch((error) => {
-          // toast.error(error.response.data.message);
-        });
+        .catch((error) => {});
     }
   };
   return {

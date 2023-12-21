@@ -6,3 +6,7 @@ export const password = "password";
 export const ConfirmPassword = "ConfirmPassword";
 export const ACCESS_TOKEN = "accessToken";
 export const TOKEN_KEY = "authToken";
+
+export const invalidEmailMessage = "Your email is incorrect. Please try again";
+
+export const passwordMismatchMessage = "Password mismatch";

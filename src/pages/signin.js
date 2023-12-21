@@ -8,19 +8,18 @@ const SignIn = () => {
   const { signInField, formErrors, handleSignInChange, handleSignInSubmit } =
     SignInContainer();
 
-  const signInList = signInFieldList(
-    formErrors,
-    handleSignInChange,
-    signInField
-  );
-  
   return (
     <>
       <div>
         <div>
           <h1>Sign In</h1>
           <form onSubmit={handleSignInSubmit}>
-            <Form inputs={signInList} />
+            <Form
+              inputs={signInFieldList}
+              field={signInField}
+              onChange={handleSignInChange}
+              formErrors={formErrors}
+            />
             <button type="submit">Submit</button>
             <button onClick={() => handleBack()}>Back</button>
           </form>
