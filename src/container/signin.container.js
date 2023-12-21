@@ -1,3 +1,4 @@
+import useUseRoute from "@/hooks/useUseRoute";
 import { postSignInData } from "@/utils/api";
 import { setAuthToken } from "@/utils/auth";
 import { ACCESS_TOKEN } from "@/utils/constant";
@@ -6,6 +7,8 @@ import validation from "@/utils/validation";
 import { useState } from "react";
 
 const SignInContainer = () => {
+  const { handlePush } = useUseRoute();
+
   const [signInField, setSignInField] = useState({
     email: "",
     password: "",
@@ -43,6 +46,7 @@ const SignInContainer = () => {
               setLocalStorageItem(ACCESS_TOKEN, res?.data?.data);
               const token = res.data.data.token;
               setAuthToken(token);
+              handlePush("/about");
               // res.json({ token });
               // if (res.data.data.role === "teacher") {
               //   navigate("/teacher/dashboard");

@@ -1,34 +1,34 @@
 import { NextResponse } from "next/server";
-import { getAuthToken } from "./utils/auth";
+import { TOKEN_KEY } from "./utils/constant";
 
 const authPages = ["/signin", "/signup", "/"];
 
 export const middleware = (request) => {
-  const authToken = getAuthToken();
-  console.log("authToken", authToken);
+  let cookie = request.cookies.get(TOKEN_KEY);
+  let authToken = cookie?.value;
 
   const loggedInUserNotAccessPaths = authPages.includes(
     request.nextUrl.pathname
   );
 
   if (loggedInUserNotAccessPaths) {
-    console.log("yes path");
-
     if (authToken) {
-      console.log("authToken");
-      return NextResponse.redirect(new URL("/home", request.url));
-    } else {
-      console.log("no authToken");
+      return NextResponse.redirect(new URL("/about", request.url));
     }
   } else {
-    console.log("not path");
     if (!authToken) {
-      console.log("empty authToken");
       return NextResponse.redirect(new URL("/signin", request.url));
     }
   }
 };
 
 export const config = {
-  matcher: ["/", "/signin", "/signup", "/home/:path*", "/about/:path*"],
+  matcher: [
+    "/",
+    "/signin",
+    "/signup",
+    "/home/:path*",
+    "/about/:path*",
+    "/contact/:path*",
+  ],
 };
