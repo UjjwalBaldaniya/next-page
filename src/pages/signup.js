@@ -17,18 +17,17 @@ const SignUp = () => {
     setDropdown,
   } = SignUpContainer();
 
-  const signUpList = signUpFieldList(
-    formErrors,
-    handleSignupChange,
-    signupField
-  );
-
   return (
     <>
       <div>
         <h1>Sign Up</h1>
         <form onSubmit={handleSignupSubmit}>
-          <Form inputs={signUpList} />
+          <Form
+            inputs={signUpFieldList}
+            field={signupField}
+            onChange={handleSignupChange}
+            formErrors={formErrors}
+          />
           <select
             value={dropdown.role}
             onChange={(e) => setDropdown(e.target.value)}

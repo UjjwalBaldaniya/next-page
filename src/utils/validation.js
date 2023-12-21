@@ -2,55 +2,63 @@ import {
   ConfirmPassword,
   Password,
   email,
+  invalidEmailMessage,
   name,
   oldPassword,
   password,
+  passwordMismatchMessage,
 } from "./constant";
-import { emailRegex, nameRegex, passwordRegex } from "./regex";
+import { firstCapAndSplit } from "./javascript";
+import {
+  confirmPassword,
+  emailValidation,
+  notEmpty,
+  passwordCheck,
+  stringValue
+} from "./regex";
 
 const validation = (pattern, value, passwordValue) => {
   switch (pattern) {
     case name:
-      if (value.trim().length < 2) {
-        return "Name must be at least 2 characters";
-      } else if (!nameRegex.test(value)) {
-        return "Name cannot contain numbers or special characters";
+      if (!value) {
+        return {
+          isValid: notEmpty(value),
+          message: `Please enter ${firstCapAndSplit(pattern)?.toLowerCase()}`,
+        };
       }
-      break;
+      const output = stringValue(value);
+      return { isValid: !output, message: output };
 
     case email:
-      if (!emailRegex.test(value)) {
-        return "Invalid email format";
+      if (!value) {
+        return {
+          isValid: notEmpty(value),
+          message: `Please enter ${firstCapAndSplit(pattern)?.toLowerCase()}`,
+        };
       }
-      break;
+
+      return { isValid: emailValidation(value), message: invalidEmailMessage };
 
     case Password:
-      if (!passwordRegex.test(value)) {
-        return "The password should be at least 8 characters long & password should contain at least one uppercase letter, one lowercase letter, and one number. ";
-      }
-      break;
-
     case oldPassword:
-      if (!passwordRegex.test(value)) {
-        return "The password should be at least 8 characters long & password should contain at least one uppercase letter, one lowercase letter, and one number. ";
-      }
-      break;
-
-    //for signin & signup
     case password:
-      if (!passwordRegex.test(value)) {
-        return "The password should be at least 8 characters long & password should contain at least one uppercase letter, one lowercase letter, and one number. ";
+      if (!value) {
+        return {
+          isValid: notEmpty(value),
+          message: `Please enter ${firstCapAndSplit(pattern)?.toLowerCase()}`,
+        };
       }
-      break;
+      const res = passwordCheck(value);
+      return { isValid: !res, message: res };
 
     case ConfirmPassword:
-      if (value !== passwordValue) {
-        return "Passwords do not match";
-      }
-      break;
+      return {
+        isValid: confirmPassword(value, passwordValue),
+        message: passwordMismatchMessage,
+      };
 
     default:
-      return false;
+      return { isValid: false };
   }
 };
 

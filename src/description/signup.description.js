@@ -16,38 +16,23 @@ export const dropdownList = [
   },
 ];
 
-export const signUpFieldList = (
-  formErrors,
-  handleSignupChange,
-  signupField
-) => {
-  return [
-    {
-      name: "name",
-      type: "text",
-      placeholder: "name",
-      label: "Name :- ",
-      showErrors: formErrors.name,
-      onChange: handleSignupChange,
-      value: signupField.name,
-    },
-    {
-      name: "email",
-      type: "email",
-      placeholder: "email",
-      label: "Email Id :- ",
-      showErrors: formErrors.email,
-      onChange: handleSignupChange,
-      value: signupField.email,
-    },
-    {
-      name: "password",
-      type: "password",
-      placeholder: "password",
-      label: "Password :- ",
-      showErrors: formErrors.password,
-      onChange: handleSignupChange,
-      value: signupField.password,
-    },
-  ];
-};
+export const signUpFieldList = [
+  {
+    name: "name",
+    type: "text",
+    placeholder: "name",
+    label: "Name :- ",
+  },
+  {
+    name: "email",
+    type: "email",
+    placeholder: "email",
+    label: "Email Id :- ",
+  },
+  {
+    name: "password",
+    type: "password",
+    placeholder: "password",
+    label: "Password :- ",
+  },
+];
