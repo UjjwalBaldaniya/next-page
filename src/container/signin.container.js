@@ -1,7 +1,8 @@
 import useUseRoute from "@/hooks/useUseRoute";
-import { postSignInData } from "@/utils/api";
+import { api } from "@/utils/api";
 import { setAuthToken } from "@/utils/auth";
 import { ACCESS_TOKEN } from "@/utils/constant";
+import { ManageErrorList, keys, length } from "@/utils/javascript";
 import { setLocalStorageItem } from "@/utils/localStorage";
 import validation from "@/utils/validation";
 import { useState } from "react";
@@ -22,28 +23,29 @@ const SignInContainer = () => {
     setFormErrors({ ...formErrors, [name]: { isValid, message } });
   };
 
-  const handleSignInSubmit = (e) => {
+  const handleSignInSubmit = async (e) => {
     e.preventDefault();
-    if (Object.values(signInField).some((value) => value.trim() === "")) {
+    const errors = ManageErrorList(signInField);
+
+    if (length(keys(errors))) {
+      setFormErrors(errors);
     } else {
-      postSignInData(signInField)
-        .then((res) => {
-          if (res.data.statusCode === 500) {
-            toast.error(res.data.message);
-          } else {
-            if (res.data.data.token) {
-              setLocalStorageItem(ACCESS_TOKEN, res?.data?.data);
-              const token = res.data.data.token;
-              setAuthToken(token);
-              handlePush("/about");
-            } else {
-              return res.data.data;
-            }
-          }
-        })
-        .catch((error) => {});
+      const res = await api("POST", "users/Login", false, {
+        email: signInField.email,
+        password: signInField.password,
+      });
+
+      if (res?.status) {
+        const { data } = res;
+        setLocalStorageItem(ACCESS_TOKEN, data);
+        setAuthToken(data?.token);
+        handlePush("/about");
+      } else {
+        console.error("Login failed:", res?.data);
+      }
     }
   };
+
   return {
     signInField,
     formErrors,

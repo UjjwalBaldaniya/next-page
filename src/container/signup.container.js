@@ -1,3 +1,4 @@
+import { ManageErrorList, keys, length } from "@/utils/javascript";
 import validation from "@/utils/validation";
 import { useState } from "react";
 
@@ -19,11 +20,16 @@ const SignUpContainer = () => {
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
+    const errors = ManageErrorList(signupField);
     signupField.role = dropdown;
-    if (Object.values(signupField).some((value) => value === "")) {
+    if (length(keys(errors))) {
+      setFormErrors(errors);
+      console.log("error", errors);
     } else {
+      console.log("hello", signupField);
     }
   };
+
   return {
     signupField,
     formErrors,
