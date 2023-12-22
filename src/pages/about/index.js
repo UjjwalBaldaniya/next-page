@@ -1,5 +1,6 @@
 import { posts } from "@/description/about.description";
 import useUseRoute from "@/hooks/useUseRoute";
+import Button from "@/shared/Button";
 import { removeAuthToken } from "@/utils/auth";
 import Link from "next/link";
 
@@ -14,7 +15,7 @@ const About = ({ posts }) => {
   return (
     <div>
       <h1>Blog Posts</h1>
-      <button onClick={logout}>Logout</button>
+      <Button onClick={logout}>Logout</Button>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>

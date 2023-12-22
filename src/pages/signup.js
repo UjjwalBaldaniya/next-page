@@ -4,6 +4,7 @@ import {
   signUpFieldList,
 } from "@/description/signup.description";
 import useUseRoute from "@/hooks/useUseRoute";
+import Button from "@/shared/Button";
 import Form from "@/shared/Form";
 
 const SignUp = () => {
@@ -41,8 +42,8 @@ const SignUp = () => {
               </option>
             ))}
           </select>
-          <button type="submit">Submit</button>
-          <button onClick={() => handleBack()}>Back</button>
+          <Button type="submit">Submit</Button>
+          <Button onClick={() => handleBack()}>Back</Button>
         </form>
       </div>
     </>

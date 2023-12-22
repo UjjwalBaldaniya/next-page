@@ -1,4 +1,5 @@
 import useUseRoute from "@/hooks/useUseRoute";
+import Button from "@/shared/Button";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 
@@ -16,8 +17,8 @@ export default function Home() {
       </Head>
       <main>
         <h1>Welcome to Landing page</h1>
-        <button onClick={() => handlePush("/signin")}>SignIn</button>
-        <button onClick={() => handlePush("/signup")}>SignUp</button>
+        <Button onClick={() => handlePush("/signin")}>SignIn</Button>
+        <Button onClick={() => handlePush("/signup")}>SignUp</Button>
       </main>
     </>
   );

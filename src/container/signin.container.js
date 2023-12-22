@@ -1,5 +1,6 @@
 import useUseRoute from "@/hooks/useUseRoute";
 import { api } from "@/utils/api";
+import { LOGIN_API, POST } from "@/utils/apiPath";
 import { setAuthToken } from "@/utils/auth";
 import { ACCESS_TOKEN } from "@/utils/constant";
 import { ManageErrorList, keys, length } from "@/utils/javascript";
@@ -15,6 +16,7 @@ const SignInContainer = () => {
     password: "",
   });
   const [formErrors, setFormErrors] = useState({});
+  const [loader, setLoader] = useState(false);
 
   const handleSignInChange = (e) => {
     const { name, value } = e.target;
@@ -30,16 +32,18 @@ const SignInContainer = () => {
     if (length(keys(errors))) {
       setFormErrors(errors);
     } else {
-      const res = await api("POST", "users/Login", false, {
+      setLoader(true);
+      const res = await api(POST, LOGIN_API, false, {
         email: signInField.email,
         password: signInField.password,
       });
 
       if (res?.status) {
+        setLoader(false);
         const { data } = res;
         setLocalStorageItem(ACCESS_TOKEN, data);
         setAuthToken(data?.token);
-        handlePush("/about");
+        handlePush("/home");
       } else {
         console.error("Login failed:", res?.data);
       }
@@ -47,6 +51,7 @@ const SignInContainer = () => {
   };
 
   return {
+    loader,
     signInField,
     formErrors,
     handleSignInChange,

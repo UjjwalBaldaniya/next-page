@@ -13,7 +13,7 @@ export const middleware = (request) => {
 
   if (loggedInUserNotAccessPaths) {
     if (authToken) {
-      return NextResponse.redirect(new URL("/about", request.url));
+      return NextResponse.redirect(new URL("/home", request.url));
     }
   } else {
     if (!authToken) {
