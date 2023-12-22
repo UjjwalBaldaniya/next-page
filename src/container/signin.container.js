@@ -2,6 +2,7 @@ import useUseRoute from "@/hooks/useUseRoute";
 import { postSignInData } from "@/utils/api";
 import { setAuthToken } from "@/utils/auth";
 import { ACCESS_TOKEN } from "@/utils/constant";
+import { ManageErrorList, keys, length } from "@/utils/javascript";
 import { setLocalStorageItem } from "@/utils/localStorage";
 import validation from "@/utils/validation";
 import { useState } from "react";
@@ -24,8 +25,14 @@ const SignInContainer = () => {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
-    if (Object.values(signInField).some((value) => value.trim() === "")) {
+    const errors = ManageErrorList(signInField);
+
+    if (length(keys(errors))) {
+      setFormErrors(errors);
+      console.log("first", errors);
     } else {
+      console.log("home", signInField);
+      
       postSignInData(signInField)
         .then((res) => {
           if (res.data.statusCode === 500) {
@@ -44,6 +51,7 @@ const SignInContainer = () => {
         .catch((error) => {});
     }
   };
+
   return {
     signInField,
     formErrors,
