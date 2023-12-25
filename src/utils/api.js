@@ -3,19 +3,25 @@ import { ACCESS_TOKEN } from "./constant";
 import { equal, isArray } from "./javascript";
 import { getLocalStorageItem } from "./localStorage";
 
-
 export const api = async (method, endpoint, isToken, body) => {
   try {
     const baseURL = process.env.NEXT_PUBLIC_API_URL;
-    const token = getLocalStorageItem(ACCESS_TOKEN);
+    const { token } = getLocalStorageItem(ACCESS_TOKEN);
+
+    const authHeader = () => {
+      if (isToken) {
+        return { "access-token": token };
+      } else {
+        return {};
+      }
+    };
 
     const config = {
       url: `${baseURL}/${endpoint}`,
       method,
-      headers: {},
+      headers: authHeader(),
       data: body,
     };
-    if (isToken) config.headers["Authorization"] = "Bearer " + token;
 
     const res = await axios(config);
 
