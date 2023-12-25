@@ -43,7 +43,7 @@ const SignInContainer = () => {
         const { data } = res;
         setLocalStorageItem(ACCESS_TOKEN, data);
         setAuthToken(data?.token);
-        handlePush("/home");
+        handlePush("/server");
       } else {
         console.error("Login failed:", res?.data);
       }

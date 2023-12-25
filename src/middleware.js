@@ -13,7 +13,7 @@ export const middleware = (request) => {
 
   if (loggedInUserNotAccessPaths) {
     if (authToken) {
-      return NextResponse.redirect(new URL("/home", request.url));
+      return NextResponse.redirect(new URL("/server", request.url));
     }
   } else {
     if (!authToken) {
@@ -27,8 +27,8 @@ export const config = {
     "/",
     "/signin",
     "/signup",
-    "/home/:path*",
-    "/about/:path*",
-    "/contact/:path*",
+    "/server/:path*",
+    "/client/:path*",
+    "/static/:path*",
   ],
 };
