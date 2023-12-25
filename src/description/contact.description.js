@@ -1,1 +1,1 @@
-export const tableData = ["Status", "Id", "Name", "Email"];
+export const tableData = ["email", "name", "status", "_id"];

@@ -18,7 +18,7 @@ export const values = (object) => (object ? Object.values(object) : []);
 
 export const keys = (object) => (object ? Object.keys(object) : []);
 
-export const isArray = (obj) => Array.isArray(obj)
+export const isArray = (obj) => Array.isArray(obj);
 
 export const firstLetterCap = (s) => {
   if (typeof s !== "string") return "";
@@ -42,4 +42,9 @@ export const ManageErrorList = (item) => {
     }
   });
   return validationErrors;
+};
+
+export const formatColumnName = (columnName) => {
+  const withoutUnderscore = columnName.replace("_", "");
+  return withoutUnderscore.charAt(0).toUpperCase() + withoutUnderscore.slice(1);
 };
