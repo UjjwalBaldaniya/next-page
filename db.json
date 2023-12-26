@@ -1,0 +1,22 @@
+{
+  "employees": [
+    {
+      "name": "ujjwal",
+      "location": "surat",
+      "designation": "Developer",
+      "id": 1
+    },
+    {
+      "name": "abc",
+      "location": "rajkot",
+      "designation": "It",
+      "id": 2
+    },
+    {
+      "name": "xyz",
+      "location": "vapi",
+      "designation": "Web",
+      "id": 3
+    }
+  ]
+}

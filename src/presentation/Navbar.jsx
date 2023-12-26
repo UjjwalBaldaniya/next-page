@@ -7,6 +7,7 @@ const Navbar = () => {
       <Link href="/server">Server</Link>
       <Link href="/client">Client</Link>
       <Link href="/static">Static</Link>
+      <Link href="/isr">ISR</Link>
     </nav>
   );
 };
