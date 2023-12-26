@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve-json": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -16,6 +17,8 @@
     "axios": "^1.6.2",
     "cookie": "^0.6.0",
     "js-cookie": "^3.0.5",
+    "json-server": "^0.17.4",
+    "jwt-decode": "^4.0.0",
     "next": "13.5.4",
     "nookies": "^2.5.2",
     "react": "^18",
