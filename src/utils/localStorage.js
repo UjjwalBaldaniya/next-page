@@ -1,6 +1,8 @@
 export const setLocalStorageItem = (key, value) => {
-  const serializedValue = JSON.stringify(value);
-  localStorage.setItem(key, serializedValue);
+  if (value !== undefined && value !== null) {
+    const serializedValue = JSON.stringify(value);
+    localStorage.setItem(key, serializedValue);
+  }
 };
 
 export const getLocalStorageItem = (key) => {

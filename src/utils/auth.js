@@ -2,9 +2,11 @@ import Cookies from "js-cookie";
 import { TOKEN_KEY } from "./constant";
 
 export const setAuthToken = (token) => {
-  Cookies.set(TOKEN_KEY, token, {
-    expires: 7,
-  });
+  if (token !== undefined && token !== null) {
+    Cookies.set(TOKEN_KEY, token, {
+      expires: 7,
+    });
+  }
 };
 
 export const getAuthToken = () => {

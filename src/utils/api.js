@@ -6,11 +6,11 @@ import { getLocalStorageItem } from "./localStorage";
 export const api = async (method, endpoint, isToken, body) => {
   try {
     const baseURL = process.env.NEXT_PUBLIC_API_URL;
-    const { token } = getLocalStorageItem(ACCESS_TOKEN);
+    const accessToken = getLocalStorageItem(ACCESS_TOKEN);
 
     const authHeader = () => {
       if (isToken) {
-        return { "access-token": token };
+        return { "access-token": accessToken?.token };
       } else {
         return {};
       }
