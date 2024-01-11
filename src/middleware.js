@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
-import { ROLE_TOKEN_KEY, TOKEN_KEY } from "./utils/constant";
+import { ROLE_TOKEN_KEY, TEACHER, TOKEN_KEY } from "./utils/constant";
 import { jwtDecode } from "jwt-decode";
-
-const authPages = ["/signin", "/signup", "/"];
-const teacherPages = ["/server", "/client", "/static", "/isr"];
-const studentPages = ["/home", "/about", "/contact"];
+import { authPages, studentPages, teacherPages } from "./utils/apiPath";
 
 export const middleware = (request) => {
   let authToken = request.cookies.get(TOKEN_KEY)?.value;
@@ -23,7 +20,7 @@ export const middleware = (request) => {
   const userPaths = request.nextUrl.pathname;
 
   if (authToken && !isTokenExpired()) {
-    const userPages = roleBaseToken === "teacher" ? teacherPages : studentPages;
+    const userPages = roleBaseToken === TEACHER ? teacherPages : studentPages;
 
     if (
       isLoginPage ||
