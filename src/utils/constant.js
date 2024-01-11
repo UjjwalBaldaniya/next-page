@@ -7,6 +7,7 @@ export const ConfirmPassword = "ConfirmPassword";
 export const ACCESS_TOKEN = "accessToken";
 export const TOKEN_KEY = "authToken";
 export const ROLE_TOKEN_KEY = "roleTokenKey";
+export const TEACHER = "teacher";
 
 export const invalidEmailMessage = "Your email is incorrect. Please try again";
 
